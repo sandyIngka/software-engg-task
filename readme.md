@@ -8,8 +8,7 @@
 
 - Navigate to root folder and run 
 ```bash 
-docker compose build ;
-docker compose up ; 
+docker compose up --build ;
 
 ```
 Note: Had issue with db migration command while using docker, So kindly navigate to 
