@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "author": "sandeepk",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2",
+    "express": "^4.19.2",
+    "moment": "^2.30.1",
+    "nodemon": "^3.1.0",
+    "pg": "^8.11.5",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
