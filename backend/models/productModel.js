@@ -31,7 +31,7 @@ exports.InsertProductArticles=async(product_id,article_id,required_stock)=>{
     }
   
 exports.getProducts =async()=>{
-  const query="SELECT row_to_json(j) FROM ( SELECT p.id, p.name, p.price, json_agg(json_build_object( 'req_articles', p_a.amount_of, 'id', p_a.article_id, 'name', a.name, 'stock', a.stock) ) AS articles FROM tbl_products p JOIN tbl_product_articles p_a ON p.id = p_a.product_id JOIN tbl_articles a ON a.id = p_a.article_id GROUP BY p.id, p.name, p.price) j; ";
+  const query="SELECT row_to_json(j) FROM ( SELECT p.id, p.name, p.price, json_agg(json_build_object( 'req_articles', p_a.amount_of, 'name', a.name, 'stock', a.stock) ) AS articles FROM tbl_products p JOIN tbl_product_articles p_a ON p.id = p_a.product_id JOIN tbl_articles a ON a.id = p_a.article_id GROUP BY p.id, p.name, p.price) j; ";
   try {
     const {rows} = await pool.query(query);
     let data=[];

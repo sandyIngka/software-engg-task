@@ -30,7 +30,7 @@ const List = () => {
     const validateQuantity = (index, avl_qty) => {
         if (index !== -1) {
             let qty = productQty[index].qty;
-            return qty <= avl_qty ? { 'status': true, 'message': 'Stock avilable' } : { 'status': false, 'message': 'Stock not avilable' };
+            return qty <= avl_qty ? { 'status': true, 'message': 'Stock avilable' } : { 'status': false, 'message': 'Required quantity is more than available quantity' };
         } else {
             return { 'status': false, 'message': 'Please enter the quantity' };
         }
@@ -53,7 +53,6 @@ const List = () => {
             updatedProductQty[inputIndex].qty = value;
             setproductQty(updatedProductQty);
         }
-        console.log(productQty)
     }
     useEffect(() => {
         getProducts();
@@ -66,7 +65,7 @@ const List = () => {
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Articles Required</th>
+                        {/* <th>Articles Required</th> */}
                         <th>Avilable Qunatity</th>
                         <th>Book</th>
                     </tr>
@@ -78,13 +77,13 @@ const List = () => {
                                 <tr>
                                     <td>{list.name}</td>
                                     <td>{list.price}</td>
-                                    <td>
+                                    {/* <td>
                                         {
                                             list.articles.map((article) => {
                                                 return (article.name + ':' + article.req_articles + '\n')
                                             })
                                         }
-                                    </td>
+                                    </td> */}
                                     <td>
                                         {list.avl_qty}
                                     </td>
