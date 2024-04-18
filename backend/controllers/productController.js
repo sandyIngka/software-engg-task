@@ -1,6 +1,6 @@
 const dbConnection = require('../utils/DbConnection');
 const { InsertProducts, InsertProductArticles, getProducts, getProductData } = require('../models/productModel')
-const { UpdateArticleStock } = require('../models/articleModel')
+const { UpdateStock } = require('../models/articleModel')
 exports.postCreateProduct = async (req, res, next) => {
   const data = req.body;
   try {
@@ -41,13 +41,13 @@ exports.postBookProduct = async (req, res, next) => {
     const product = await getProductData(product_id);
     product.articles.forEach(async (article) => {
       let freshStock = article.stock - (article.req_articles*qty);
-      let response = await UpdateArticleStock(freshStock, article.id);
+      let response = await UpdateStock(freshStock, article.id);
     });
     res.send({'message':'Successfully booked'}).status(200);
   }
   catch(err){
-    throw err;
-    // res.send({'message' :err.message}).status(500);
+    // throw err;
+    res.send({'message' :err.message}).status(500);
   }
 
 }

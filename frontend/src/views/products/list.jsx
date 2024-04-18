@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { getFetchProducts, bookProduct } from '../../services/productEndpoints';
+import { updateStock } from '../../services/articleEndPoints';
 const List = () => {
     const [productList, setproductList] = React.useState([]);
     const [productQty, setproductQty] = React.useState([])
@@ -9,11 +10,11 @@ const List = () => {
             setproductList(res.data.products)
         })
     }
-    const book = (list,) => {
+    const book = (list) => {
         const inputIndex = getIndex(list.id + '_qty', productQty, 'name');
         const res = validateQuantity(inputIndex, list.avl_qty)
         if (res.status) {
-            let data = { 'product_id': list.id ,'qty':list.avl_qty}
+            let data = { 'product_id': list.id ,'qty':res.req_qty}
             bookProduct(data).then((res) => {
                 if (res.status === 200) {
                     alert(res.data.message)
@@ -25,12 +26,11 @@ const List = () => {
         }
 
 
-
     }
     const validateQuantity = (index, avl_qty) => {
         if (index !== -1) {
             let qty = productQty[index].qty;
-            return qty <= avl_qty ? { 'status': true, 'message': 'Stock avilable' } : { 'status': false, 'message': 'Required quantity is more than available quantity' };
+            return qty <= avl_qty ? { 'status': true, 'message': 'Stock avilable','req_qty':qty } : { 'status': false, 'message': 'Required quantity is more than available quantity' };
         } else {
             return { 'status': false, 'message': 'Please enter the quantity' };
         }
@@ -105,6 +105,8 @@ const List = () => {
                     }
                 </tbody>
             </table>
+            <br />
+            <a href="#" onClick={()=>{updateStock()}}>Update stock</a>
         </div>
     )
 }

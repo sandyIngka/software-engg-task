@@ -15,7 +15,7 @@ exports.ImportArticle=async(name,stock,id)=>{
         throw err;
       }
     }
-exports.UpdateArticleStock=async(stock,id)=>{
+exports.UpdateStock=async(stock,id)=>{
     const query ="UPDATE tbl_articles SET stock=$1 WHERE id = $2";
     try {
         await pool.query(query, [stock,id]);
